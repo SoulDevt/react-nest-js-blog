@@ -18,12 +18,12 @@ export class UsersService {
         return this.usersRepository.findOneBy({ id });
     }
     postUser(createUserDto: CreateUserDto) {
-        return createUserDto;
+        return this.usersRepository.save(createUserDto);
     }
     async deleteUser(id: {id: number}) {
         await this.usersRepository.delete(id);
     }
     editUser(updateUserDto: UpdateUserDto, param: {id: number}) {
-        return {body: updateUserDto, param};
+        return this.usersRepository.update(param, updateUserDto);
     }
 }

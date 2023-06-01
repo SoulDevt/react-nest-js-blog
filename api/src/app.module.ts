@@ -6,11 +6,13 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entity/users.entity';
+import { ArticlesModule } from './articles/articles.module';
+import { Article } from './articles/entity/articles.entity';
 
 
 @Module({
   imports: [
-    UsersModule, 
+    UsersModule, ArticlesModule,
     TypeOrmModule.forRoot({
     type: 'mysql',
     host: 'localhost',
@@ -18,7 +20,7 @@ import { User } from './users/entity/users.entity';
     username: 'root',
     password: 'mauFJcuf5dhRMQrjj',
     database: 'react-blog-app',
-    entities: [User],
+    entities: [User, Article],
     synchronize: true,
   })],
   controllers: [AppController],

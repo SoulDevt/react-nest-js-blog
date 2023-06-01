@@ -48,7 +48,7 @@ const Home = () => {
   //   })
   // },[])
 
-  const { data, err } = useFetch("http://localhost:8000/blogs")
+  const { data, err } = useFetch("http://localhost:3000/articles")
 
   return (
     <>
