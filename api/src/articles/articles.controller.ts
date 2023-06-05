@@ -14,7 +14,7 @@ export class ArticlesController {
     }
 
     @Get("/:id")
-    getArticle(@Req() req: Request, @Param('id', ParseIntPipe) id: Number) {
+    getArticle(@Req() req: Request, @Param('id', ParseIntPipe) id: number) {
         return this.articlesService.getArticle(id);
     }
 
@@ -24,11 +24,11 @@ export class ArticlesController {
     }
 
     @Patch('/:id')
-    UpdateArticle(@Body() body: {id: Number, title: String, description: String}, @Param('id', ParseIntPipe) id: Number) {
-        return this.articlesService.UpdateArticle(id, body);
+    UpdateArticle(@Body() updateArticleDto: UpdateArticleDto, @Param('id', ParseIntPipe) id: number) {
+        return this.articlesService.UpdateArticle(id, updateArticleDto);
     }
     @Delete('/:id')
-    DeleteArticle(@Param('id', ParseIntPipe) id: Number) {
+    DeleteArticle(@Param('id', ParseIntPipe) id: number) {
         return this.articlesService.DeleteArticle(id);
     }
 

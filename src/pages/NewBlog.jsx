@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewBlog = () => {
   const [title, setTitle] = useState(null);
@@ -7,10 +8,13 @@ const NewBlog = () => {
   const [author, setAuthor] = useState(null);
   const [img, setImg] = useState(null);
 
-  const handleSubmit = () => {
+  const navigate = useNavigate(); 
+
+  const handleSubmit = async () => {
     const formData = { title, description, author, img };
-    axios.post("http://localhost:8000/blogs", formData);
+    await axios.post("http://localhost:3000/articles", formData);
     console.log("done");
+    navigate("/");
   };
 
   return (

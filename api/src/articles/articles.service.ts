@@ -32,19 +32,19 @@ export class ArticlesService {
         return this.articleRepository.find()
     }
 
-    getArticle(id: Number) {
-        return {articleId: id};
+    getArticle(id: number) {
+        return this.articleRepository.findOneBy({id})
     }
 
     postArticle(createArticleDto: CreateArticleDto) {
         return this.articleRepository.save(createArticleDto)
     }
 
-    UpdateArticle(id: Number, body) {
-        return {id: id, body: body};
+    UpdateArticle(id: number, updateArticleDto: UpdateArticleDto) {
+        return this.articleRepository.update(id, updateArticleDto)
     }
 
-    DeleteArticle(id: Number) {
-        return {id: id};
+    DeleteArticle(id: number) {
+        return this.articleRepository.delete(id)
     }
 }

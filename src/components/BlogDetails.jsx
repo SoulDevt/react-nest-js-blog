@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { redirect, useNavigate, useParams } from "react-router-dom";
-import useFetch from "../useFetch";
+import { useNavigate, useParams } from "react-router-dom";
+// import useFetch from "../useFetch";
 import axios from "axios";
 
 
@@ -26,20 +26,21 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchAxios = async () => {
       try {
-        const data = await axios.get("http://localhost:8000/blogs/" + id);
+        const data = await axios.get("http://localhost:3000/articles/" + id);
         setData(data.data);
+        console.log(data);
       } catch (error) {
         console.error(error);
       }
     }
     fetchAxios()
-  },[])
+  },[id])
 
 
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     try {
-      axios.delete("http://localhost:8000/blogs/" + id)
+      await axios.delete("http://localhost:3000/articles/" + id)
       navigate('/')
     } catch(error) {
       console.error(error);
