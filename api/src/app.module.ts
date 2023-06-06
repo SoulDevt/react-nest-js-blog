@@ -8,6 +8,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entity/users.entity';
 import { ArticlesModule } from './articles/articles.module';
 import { Article } from './articles/entity/articles.entity';
+import { AuthController } from './auth/auth.controller';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -22,7 +24,8 @@ import { Article } from './articles/entity/articles.entity';
     database: 'react-blog-app',
     entities: [User, Article],
     synchronize: true,
-  })],
+  }),
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

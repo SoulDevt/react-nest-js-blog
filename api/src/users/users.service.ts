@@ -23,6 +23,11 @@ export class UsersService {
     async deleteUser(id: {id: number}) {
         await this.usersRepository.delete(id);
     }
+
+    async findByEmail(email: any) {
+        return this.usersRepository.findOne({where: {email}});
+    }
+
     editUser(updateUserDto: UpdateUserDto, param: {id: number}) {
         return this.usersRepository.update(param, updateUserDto);
     }
