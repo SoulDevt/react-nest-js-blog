@@ -18,6 +18,9 @@ const BlogCard = ({title, author, img, id: idBlog}) => {
     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
         <Link to={`/blog/${idBlog}`}>Voir l'article</Link>
     </button>
+    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        <Link to={`/blog/edit/${idBlog}`}>Modifier</Link>
+    </button>
     </div>
 
   </div>

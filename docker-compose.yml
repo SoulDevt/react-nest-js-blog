@@ -13,6 +13,28 @@ services:
     volumes:
       - db:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  react-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+  #   depends_on:
+  #     - nestjs-api
+
+  # nestjs-api:
+  #   build:
+  #     context: ./api
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ./api:/app
+  #   depends_on:
+  #     - db
+
   adminer:
     image: adminer
     restart: always

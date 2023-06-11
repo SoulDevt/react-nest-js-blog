@@ -26,7 +26,7 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchAxios = async () => {
       try {
-        const data = await axios.get("http://localhost:3000/articles/" + id);
+        const data = await axios.get("http://localhost:8000/articles/" + id);
         setData(data.data);
         console.log(data);
       } catch (error) {
@@ -40,7 +40,7 @@ const BlogDetails = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete("http://localhost:3000/articles/" + id)
+      await axios.delete("http://localhost:8000/articles/" + id)
       navigate('/')
     } catch(error) {
       console.error(error);
@@ -68,6 +68,7 @@ const BlogDetails = () => {
           <button onClick={handleDelete} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
             Delete
           </button>
+          
         </div>
       </div>
     </div>

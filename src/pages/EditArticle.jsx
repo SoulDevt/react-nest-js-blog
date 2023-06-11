@@ -1,18 +1,35 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const NewBlog = () => {
+const EditArticle = () => {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [author, setAuthor] = useState(null);
   const [img, setImg] = useState(null);
-
+//   const [data, setData] = useState([])
+  const { id } = useParams();
   const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const fetchAxios = async () => {
+      try {
+        const data = await axios.get("http://localhost:8000/articles/" + id);
+        setTitle(data.data.title);
+        setDescription(data.data.description);
+        setAuthor(data.data.author);
+        setImg(data.data.img);
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchAxios()
+  },[id])
 
   const handleSubmit = async () => {
     const formData = { title, description, author, img };
-    await axios.post("http://localhost:8000/articles", formData);
+    await axios.patch(`http://localhost:8000/articles/${id}`, formData);
     console.log("done");
     navigate("/");
   };
@@ -32,7 +49,7 @@ const NewBlog = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="text"
-              placeholder="Username"
+              value={title ? title : ""}
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -46,6 +63,7 @@ const NewBlog = () => {
               Description
             </label>
             <textarea
+              value={description || ""}
               onChange={(e) => setDescription(e.target.value)}
               className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="description"
@@ -56,13 +74,14 @@ const NewBlog = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="username"
             >
-              Title
+              Author
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="text"
               placeholder="Username"
+              value={author || ""}
               onChange={(e) => {
                 setAuthor(e.target.value);
               }}
@@ -78,6 +97,7 @@ const NewBlog = () => {
               id="username"
               type="text"
               placeholder="link for the image"
+              value={img || ""}
               onChange={(e) => {
                 setImg(e.target.value);
               }}
@@ -98,4 +118,4 @@ const NewBlog = () => {
   );
 };
 
-export default NewBlog;
+export default EditArticle;

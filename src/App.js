@@ -1,9 +1,10 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import BlogDetails from './components/BlogDetails';
 import NewBlog from './pages/NewBlog';
+import EditArticle from './pages/EditArticle';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home/>}></Route>
           <Route path="/blog/:id" element={<BlogDetails/>}></Route>
           <Route path="/blog/create" element={<NewBlog/>}></Route>
+          <Route path="/blog/edit/:id" element={<EditArticle/>}></Route>
           <Route path="*" element={<p>404 Error</p>}></Route>
         </Routes>
       </div>
