@@ -7,6 +7,7 @@ import NewBlog from './pages/NewBlog';
 import EditArticle from './pages/EditArticle';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/blog/edit/:id" element={<EditArticle/>}></Route>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/register" element={<Register/>}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
           <Route path="*" element={<p>404 Error</p>}></Route>
         </Routes>
       </div>

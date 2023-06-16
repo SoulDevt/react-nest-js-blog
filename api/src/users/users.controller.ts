@@ -27,4 +27,5 @@ export class UsersController {
     editUser(@Body() updateUserDto: UpdateUserDto ,@Param('id', ParseIntPipe) param: {id: number}) {
         return this.usersService.editUser(updateUserDto, param);
     }
+
 }

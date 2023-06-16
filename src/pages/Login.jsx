@@ -1,17 +1,36 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const navigate = useNavigate()
+
+    const storeTokenInLocalStorage = (token) => {
+      localStorage.setItem('jwt_token', token);
+    };
 
     const handleSubmit = async () => {
-        console.log("clicked")
-        await axios.post("http://localhost:8000/auth/login", {email, password})
-    }
+        try {
+          const response = await axios.post("http://localhost:8000/auth/login", {email: email, password: password})
+          const token = response.data.access_token;
+          storeTokenInLocalStorage(token);
+          console.log(response)
+          navigate("/profile")
+        } catch (error) {
+          console.log(error)
+        }
 
-    
+    };
+
+    const getTokenFromLocalStorage = () => {
+      return localStorage.getItem('jwt_token');
+    };
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${getTokenFromLocalStorage()}`;
+     
 
   return (
     <div className="bg-white shadow-md rounded px-8 pt-10 pb-8 mb-4 flex flex-col w-1/2 mx-auto my-48">
